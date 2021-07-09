@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "Test repository",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlangy/Test.git"
+  },
+  "author": "Jonathan Langlois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlangy/Test/issues"
+  },
+  "homepage": "https://github.com/jlangy/Test#readme"
+}
