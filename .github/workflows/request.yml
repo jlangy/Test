@@ -8,11 +8,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/github-script@v4
-        env:
-          GH_SECRET: ${{ secrets.GH_SECRET }}
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@master
         with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
-          script: |
-            const script = require('./scripts/test.js')
-            script( {github, context} )
+          url: 'https://cttuyb3bsf.execute-api.ca-central-1.amazonaws.com/test/actions'
+          method: 'PUT'
+          data: '{"prNumber: 10", "success": false, "id": 1}'
+          customHeaders: '{"Authorization": "secret"}'
