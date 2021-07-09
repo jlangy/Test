@@ -13,5 +13,8 @@ jobs:
         with:
           url: 'https://cttuyb3bsf.execute-api.ca-central-1.amazonaws.com/test/actions'
           method: 'PUT'
-          data: '{"prNumber: 10", "success": false, "id": 1}'
+          data: '{"prNumber": 10, "success": false, "id": 1}'
           customHeaders: '{"Authorization": "secret"}'
+
+
+7-09T18:51:10.878
