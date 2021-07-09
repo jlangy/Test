@@ -8,6 +8,6 @@ module.exports = async ({ github, context }) => {
   const { payload } = context;
   console.log(process.env.GH_SECRET.length);
 
-  axios.put(url, { prNumber: 1, prSuccess: true, id: 1 }, axiosConfig);
+  axios.put(url, { prNumber: "1", prSuccess: "true", id: "1" }, axiosConfig);
 
 };
