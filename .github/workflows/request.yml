@@ -14,25 +14,34 @@ jobs:
       API_URL: https://cttuyb3bsf.execute-api.ca-central-1.amazonaws.com/test/actions/
     steps:
       - uses: actions/checkout@v2
-      - name: Terraform Plan
-        id: plan
-        if: github.event_name == 'pull_request'
-        run: exit 1
-        continue-on-error: true
+      # - name: Terraform Plan
+      #   id: plan
+      #   if: github.event_name == 'pull_request'
+      #   run: exit 1
+      #   continue-on-error: true
 
-      - name: Update Plan Status
-        uses: fjogeleit/http-request-action@master
+      # - name: Update Plan Status
+      #   uses: fjogeleit/http-request-action@master
+      #   with:
+      #     url: "${{env.API_URL}}?status=plan"
+      #     method: 'PUT'
+      #     data: '{"prNumber": "${{ github.event.number }}", "planSuccess": "${{steps.plan.outcome}}""}'
+      #     # customHeaders: '{"Authorization": "${{secrets.GH_SECRET}}"}'
+      #     customHeaders: '{"Authorization": "secret"}'
+
+      # - name: Terraform Plan Status
+      #   if: steps.plan.outcome == 'failure'
+      #   run: exit 1
+
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve
+      #   working-directory: ./terraform
+      - uses: actions/github-script@v4
+        env:
+          GH_SECRET: ${{ secrets.GH_SECRET }}
         with:
-          url: "${{env.API_URL}}?status=plan"
-          method: 'PUT'
-          data: '{"prNumber": "${{ github.event.number }}", "planSuccess": "${{steps.plan.outcome}}""}'
-          customHeaders: '{"Authorization": "${{secrets.GH_SECRET}}"}'
-
-      - name: Terraform Plan Status
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
-
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
-        working-directory: ./terraform
+          github-token: ${{ secrets.GH_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const script = require('./scripts/test.js')
+            console.log(await script({ github, context }))
