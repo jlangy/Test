@@ -37,6 +37,8 @@ jobs:
       #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       #   run: terraform apply -auto-approve
       #   working-directory: ./terraform
+      - name: Install Yarn dependencies in root
+        run: yarn
       - uses: actions/github-script@v4
         env:
           GH_SECRET: ${{ secrets.GH_SECRET }}
