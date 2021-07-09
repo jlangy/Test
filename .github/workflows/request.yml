@@ -13,4 +13,4 @@ jobs:
           github-token: ${{ secrets.GH_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const script = require('./scripts/test.js')
-            script({github, context}, ${{secrets.GH_SECRET}})
+            script({github, context})
