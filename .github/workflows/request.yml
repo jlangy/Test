@@ -15,6 +15,7 @@ jobs:
       - name: pr number
         run: |
           echo "${{env.GITHUB_REF}}"
+          echo hello
       # - name: Deploy Stage
       #   uses: fjogeleit/http-request-action@master
       #   with:
