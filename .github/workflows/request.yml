@@ -52,7 +52,7 @@ jobs:
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
 
-      - name: Terraform Apply
+      - name: Terraform Apply 
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: echo "${{github.commits}}"
 
