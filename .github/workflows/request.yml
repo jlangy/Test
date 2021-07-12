@@ -55,7 +55,7 @@ jobs:
       - name: Terraform Apply 
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: |
-          echo "sha is ${{github.sha}} owner is ${{env.GITHUB_REPOSITORY}} repo is ${{github.repo}}"
+          echo "sha is ${{github.sha}} owner is ${{github.repository}} repo is ${{github.organization}}"
 
 
       # - uses: borales/actions-yarn@v2.3.0
