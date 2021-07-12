@@ -64,7 +64,7 @@ jobs:
 
       - name: Test
         run: |
-          echo "${{github.outputs.number}}""
+          echo "${{github.outputs.number}}"
 
 
       # - uses: borales/actions-yarn@v2.3.0
