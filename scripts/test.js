@@ -3,6 +3,7 @@
 const axios = require('axios');
 const axiosConfig = { headers: { Authorization: process.env.GH_SECRET } };
 const API_URL = "https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/";
+const _ = require('lodash');
 
 // module.exports = async ({ github, context }) => {
 //   const { payload } = context;
