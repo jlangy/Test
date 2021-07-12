@@ -1,23 +1,27 @@
 name: Request
 
 on:
-  workflow_dispatch:
-    inputs:
-      projectName:
-        description: "Project Name"
-        required: true
-      identityProviders:
-        description: "Identity Providers"
-        required: true
-      validRedirectUrls:
-        description: "Valid Redirect Urls"
-        required: true
-      environments:
-        description: "Environments"
-        required: true
-      id:
-        description: "Request id"
-        required: true
+  push:
+    branches:
+      - main
+      - master
+  # workflow_dispatch:
+  #   inputs:
+  #     projectName:
+  #       description: "Project Name"
+  #       required: true
+  #     identityProviders:
+  #       description: "Identity Providers"
+  #       required: true
+  #     validRedirectUrls:
+  #       description: "Valid Redirect Urls"
+  #       required: true
+  #     environments:
+  #       description: "Environments"
+  #       required: true
+  #     id:
+  #       description: "Request id"
+  #       required: true
   # pull_request:
   #   branches:
   #     - main
@@ -42,25 +46,25 @@ jobs:
       #     url: "${{env.API_URL}}?status=plan"
       #     method: 'PUT'
       #     data: '{"prNumber": "${{ github.event.number }}", "planSuccess": "${{steps.plan.outcome}}""}'
-      #     # customHeaders: '{"Authorization": "${{secrets.GH_SECRET}}"}'
       #     customHeaders: '{"Authorization": "secret"}'
 
       # - name: Terraform Plan Status
       #   if: steps.plan.outcome == 'failure'
       #   run: exit 1
 
-      # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   run: terraform apply -auto-approve
-      #   working-directory: ./terraform
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
-      - uses: actions/github-script@v4
-        env:
-          GH_SECRET: ${{ secrets.GH_SECRET }}
-        with:
-          github-token: ${{ secrets.GH_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
-          script: |
-            const script = require('./scripts/test.js')
-            console.log(await script({ github, context }))
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: echo "${{github.event}}"
+        working-directory: ./terraform
+
+      # - uses: borales/actions-yarn@v2.3.0
+      #   with:
+      #     cmd: install
+      # - uses: actions/github-script@v4
+      #   env:
+      #     GH_SECRET: ${{ secrets.GH_SECRET }}
+      #   with:
+      #     github-token: ${{ secrets.GH_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
+      #     script: |
+      #       const script = require('./scripts/test.js')
+      #       console.log(await script({ github, context }))
