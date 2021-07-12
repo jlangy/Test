@@ -18,10 +18,10 @@ on:
       id:
         description: "Request id"
         required: true
-  pull_request:
-    branches:
-      - main
-      - master
+  # pull_request:
+  #   branches:
+  #     - main
+  #     - master
 
 jobs:
   iss:

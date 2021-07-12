@@ -116,7 +116,7 @@ module.exports = async ({ github, context }) => {
     //   data: { number },
     // } = pr;
     axios.put(API_URL, { prNumber: 1, prSuccess: true, id }, axiosConfig);
-    return pr;
+    console.log('passed axios')
   } catch (err) {
     console.log(err)
     axios.put(API_URL, { prNumber: 1, prSuccess: false, id }, axiosConfig);
