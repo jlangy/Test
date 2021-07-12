@@ -31,7 +31,7 @@ jobs:
   iss:
     runs-on: ubuntu-18.04
     outputs:
-      prNumber: ${{steps.prNumber.outputs.prNumber}}
+      number: ${{steps.prNumber.outputs.number}}
     env:
       API_URL: https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/
     steps:
