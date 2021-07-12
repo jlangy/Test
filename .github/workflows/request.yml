@@ -60,10 +60,11 @@ jobs:
         run: |
           number=$(curl -H "Accept: application/vnd.github.groot-preview+json" https://api.github.com/repos/${{github.repository}}/commits/${{github.sha}}/pulls | jq ".[0].number")
           echo "::set-output name=number::$number"
+          echo $number
 
       - name: Test
         run: |
-          echo ${{github.outputs.number}}
+          echo "${{github.outputs.number}}""
 
 
       # - uses: borales/actions-yarn@v2.3.0
