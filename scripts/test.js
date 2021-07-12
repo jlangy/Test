@@ -2,7 +2,7 @@
 // see https://github.com/actions/github-script#run-a-separate-file-with-an-async-function
 const axios = require('axios');
 const axiosConfig = { headers: { Authorization: process.env.GH_SECRET } };
-const url = "https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/";
+const API_URL = "https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/";
 
 // module.exports = async ({ github, context }) => {
 //   const { payload } = context;
