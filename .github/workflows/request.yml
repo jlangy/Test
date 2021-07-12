@@ -54,7 +54,7 @@ jobs:
 
       - name: Terraform Apply 
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: echo "${{github.head}}"
+        run: echo "${{env.GITHUB_SHA}}"
 
       # - uses: borales/actions-yarn@v2.3.0
       #   with:
