@@ -2,16 +2,65 @@ name: Request
 
 on:
   workflow_dispatch:
+    inputs:
+      projectName:
+        description: "Project Name"
+        required: true
+      identityProviders:
+        description: "Identity Providers"
+        required: true
+      validRedirectUrls:
+        description: "Valid Redirect Urls"
+        required: true
+      environments:
+        description: "Environments"
+        required: true
+      id:
+        description: "Request id"
+        required: true
+  pull_request:
+    branches:
+      - main
+      - master
 
 jobs:
   iss:
     runs-on: ubuntu-18.04
+    env:
+      API_URL: https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy Stage
-        uses: fjogeleit/http-request-action@master
+      # - name: Terraform Plan
+      #   id: plan
+      #   if: github.event_name == 'pull_request'
+      #   run: exit 1
+      #   continue-on-error: true
+
+      # - name: Update Plan Status
+      #   uses: fjogeleit/http-request-action@master
+      #   with:
+      #     url: "${{env.API_URL}}?status=plan"
+      #     method: 'PUT'
+      #     data: '{"prNumber": "${{ github.event.number }}", "planSuccess": "${{steps.plan.outcome}}""}'
+      #     # customHeaders: '{"Authorization": "${{secrets.GH_SECRET}}"}'
+      #     customHeaders: '{"Authorization": "secret"}'
+
+      # - name: Terraform Plan Status
+      #   if: steps.plan.outcome == 'failure'
+      #   run: exit 1
+
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve
+      #   working-directory: ./terraform
+      - uses: borales/actions-yarn@v2.3.0
         with:
-          url: 'https://cttuyb3bsf.execute-api.ca-central-1.amazonaws.com/test/actions'
-          method: 'PUT'
-          data: '{"prNumber": 10, "success": false, "id": 1}'
-          customHeaders: '{"Authorization": "secret"}'
+          cmd: install
+      - uses: actions/github-script@v4
+        env:
+          GH_SECRET: ${{ secrets.GH_SECRET }}
+        with:
+          github-token: ${{ secrets.GH_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const script = require('./scripts/test.js')
+            console.log(await script({ github, context }))
