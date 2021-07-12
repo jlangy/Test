@@ -2,6 +2,22 @@ name: Request
 
 on:
   workflow_dispatch:
+    inputs:
+      projectName:
+        description: "Project Name"
+        required: true
+      identityProviders:
+        description: "Identity Providers"
+        required: true
+      validRedirectUrls:
+        description: "Valid Redirect Urls"
+        required: true
+      environments:
+        description: "Environments"
+        required: true
+      id:
+        description: "Request id"
+        required: true
   pull_request:
     branches:
       - main
@@ -11,7 +27,7 @@ jobs:
   iss:
     runs-on: ubuntu-18.04
     env:
-      API_URL: https://cttuyb3bsf.execute-api.ca-central-1.amazonaws.com/test/actions/
+      API_URL: https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/
     steps:
       - uses: actions/checkout@v2
       # - name: Terraform Plan
@@ -37,8 +53,9 @@ jobs:
       #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       #   run: terraform apply -auto-approve
       #   working-directory: ./terraform
-      - name: Install Yarn dependencies in root
-        run: yarn
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
       - uses: actions/github-script@v4
         env:
           GH_SECRET: ${{ secrets.GH_SECRET }}
