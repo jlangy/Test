@@ -63,7 +63,7 @@ jobs:
 
       - name: Test
         run: |
-          echo ${{github.outputs.prNumber}}
+          echo ${{github.outputs.number}}
 
 
       # - uses: borales/actions-yarn@v2.3.0
