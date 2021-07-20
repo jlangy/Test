@@ -4,6 +4,7 @@
 module.exports = async ({ github, context }) => {
   console.log(JSON.stringify(github, null, 2))
   console.log(JSON.stringify(context, null, 2))
+  console.log(context.run_id)
 };
 
 // draft, submitted, pr, prfailed, planned, planfailed, approved, applied, applyfailed
