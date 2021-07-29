@@ -5,11 +5,9 @@ on: pull_request
 jobs:
   iss:
     runs-on: ubuntu-18.04
-    outputs:
-      number: ${{steps.prNumber.outputs.number}}
-    env:
-      API_URL: https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/
     steps:
+      - name: control
+        run: echo "${{github.event}}"
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
