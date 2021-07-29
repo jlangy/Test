@@ -63,7 +63,7 @@ jobs:
           fullLabels=$(jq ".[0].labels" <<< "$pr")
           botLabel=$(jq -c '.[] | select(.name | contains("auto_generated")).name' <<< "$fullLabels")
           echo "::set-output name=number::$number"
-          echo "::set-output name=botLabel::$botLabel"
+          echo "::set-output name=botLabel::$botLabel" 
 
       - name: Echo variables
         run: |
