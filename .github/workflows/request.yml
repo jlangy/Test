@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: control
-        run: echo damn
+        run: echo "${{github.event}}"
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
