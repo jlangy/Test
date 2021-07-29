@@ -14,7 +14,6 @@ jobs:
 
       - name: Update Apply Status
         uses: fjogeleit/http-request-action@master
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.prNumber.outputs.botLabel == '"auto_generated"'
         with:
           url: 'https://example.com:81'
           method: 'GET'
