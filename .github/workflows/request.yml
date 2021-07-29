@@ -1,6 +1,6 @@
 name: Request
 
-on: [pull_request, push]
+on: pull_request
 
 jobs:
   iss:
@@ -11,3 +11,11 @@ jobs:
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
+
+      - name: Update Apply Status
+        uses: fjogeleit/http-request-action@master
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.prNumber.outputs.botLabel == '"auto_generated"'
+        with:
+          url: 'https://example.com:81'
+          method: 'GET'
+          timeout: '60000'
