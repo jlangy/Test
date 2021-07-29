@@ -9,5 +9,5 @@ jobs:
       - name: control
         run: echo hi
       - name: label test
-        if: github.event.label.name == 'bug'
+        # if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
