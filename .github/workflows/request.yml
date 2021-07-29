@@ -10,25 +10,6 @@ jobs:
     env:
       API_URL: https://daifppxrii.execute-api.ca-central-1.amazonaws.com/test/actions/
     steps:
-      - uses: actions/checkout@v2
-      # - name: Terraform Plan
-      #   id: plan
-      #   if: github.event_name == 'pull_request'
-      #   run: exit 1
-      #   continue-on-error: true
-
-      # - name: Update Plan Status
-      #   uses: fjogeleit/http-request-action@master
-      #   with:
-      #     url: "${{env.API_URL}}?status=plan"
-      #     method: 'PUT'
-      #     data: '{"prNumber": "${{ github.event.number }}", "planSuccess": "${{steps.plan.outcome}}""}'
-      #     customHeaders: '{"Authorization": "secret"}'
-
-      # - name: Terraform Plan Status
-      #   if: steps.plan.outcome == 'failure'
-      #   run: exit 1
-
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
