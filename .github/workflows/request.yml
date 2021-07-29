@@ -67,7 +67,7 @@ jobs:
 
       - name: Echo variables
         run: |
-          echo ${{steps.prNumber.outputs.botLabel}}
+          echo "${{steps.prNumber.outputs.botLabel}}"
 
       - name: Update Apply Status
         uses: fjogeleit/http-request-action@master
