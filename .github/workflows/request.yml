@@ -6,6 +6,8 @@ jobs:
   iss:
     runs-on: ubuntu-18.04
     steps:
+      - name: control
+        run: echo damn
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
