@@ -12,9 +12,10 @@ jobs:
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
 
-      - name: Update Apply Status
-        uses: fjogeleit/http-request-action@master
+      - name: Save terraform plan event
+        uses: actions/github-script@v4
         with:
-          url: 'https://example.com:81'
-          method: 'GET'
-          timeout: '60000'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const script = require('./scripts/test.js')
+            console.log(script({github, context}))
