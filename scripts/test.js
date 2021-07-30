@@ -9,9 +9,8 @@ module.exports = async ({ github, context }) => {
   // });
   // console.log(result)
 
-  const {PR_LABELS} = process.env;
-  const prLabels = JSON.parse(PR_LABELS)
-  console.log(prLabels.map(label => label.name).includes('bug'))
+  const {PR_BRANCH} = process.env;
+  console.log(PR_BRANCH)
 };
 
 // draft, submitted, pr, prfailed, planned, planfailed, approved, applied, applyfailed
