@@ -11,6 +11,15 @@ jobs:
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
+      
+      # NPM PACKAGES
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Yarn dependencies in root
+        run: yarn
 
       - name: Save terraform plan event
         uses: actions/github-script@v4
