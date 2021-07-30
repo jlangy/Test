@@ -9,24 +9,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: control
-        run: echo "${{github.event.label}}"
+        run: echo ${{github.event.label}}
       - name: label test
-        if: github.event.label.name == 'bug'
+        if: github.event.label.name == '"bug"'
         run: echo holy guacomole it worked
       
       # NPM PACKAGES
-      - uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install Yarn dependencies in root
-        run: yarn
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       **/node_modules
+      #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      # - name: Install Yarn dependencies in root
+      #   run: yarn
 
-      - name: Save terraform plan event
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const script = require('./scripts/test.js')
-            console.log(script({github, context}))
+      # - name: Save terraform plan event
+      #   uses: actions/github-script@v4
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     script: |
+      #       const script = require('./scripts/test.js')
+      #       console.log(script({github, context}))
