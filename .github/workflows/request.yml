@@ -1,13 +1,13 @@
 name: Request
 
-on: pull_request
+on: [pull_request, push]
 
 jobs:
   iss:
     runs-on: ubuntu-18.04
     steps:
       - name: control
-        run: echo "${{github.event}}"
+        run: echo "${{github.event.label}}"
       - name: label test
         if: github.event.label.name == 'bug'
         run: echo holy guacomole it worked
