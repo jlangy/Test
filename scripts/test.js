@@ -10,7 +10,7 @@ module.exports = async ({ github, context }) => {
   // console.log(result)
 
   const {PR_LABELS} = process.env;
-  const prLables = JSON.parse(PR_LABELS)
+  const prLabels = JSON.parse(PR_LABELS)
   console.log(prLabels.map(label => label.name).includes('bug'))
 };
 
