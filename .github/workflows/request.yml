@@ -6,6 +6,8 @@ jobs:
   iss:
     runs-on: ubuntu-18.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: control
         run: echo "${{github.event.label}}"
       - name: label test
