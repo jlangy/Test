@@ -8,14 +8,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: control
-        env:
-          LABEL: ${{ toJson(github.event.pull_request.labels) }}
-        run: |
-          echo "$LABEL"
-      - name: label test
-        if: github.event.label.name == '"bug"'
-        run: echo holy guacomole it worked
+      # - name: control
+      #   env:
+      #     LABEL: ${{ toJson(github.event.pull_request.labels) }}
+      #   run: |
+      #     echo "$LABEL"
+      # - name: label test
+      #   if: github.event.label.name == '"bug"'
+      #   run: echo holy guacomole it worked
       
       # NPM PACKAGES
       # - uses: actions/cache@v2
@@ -26,10 +26,12 @@ jobs:
       # - name: Install Yarn dependencies in root
       #   run: yarn
 
-      # - name: Save terraform plan event
-      #   uses: actions/github-script@v4
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     script: |
-      #       const script = require('./scripts/test.js')
-      #       console.log(script({github, context}))
+      - name: Save terraform plan event
+        uses: actions/github-script@v4
+        env:
+          PR_LABELS: ${{ toJson(github.event.pull_request.labels) }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const script = require('./scripts/test.js')
+            console.log(script({github, context}))
