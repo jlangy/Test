@@ -9,7 +9,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: control
-        run: echo ${{github.event.label}}
+        env:
+          LABEL: ${{github.event.label}}
+        run: echo "$LABEL"
       - name: label test
         if: github.event.label.name == '"bug"'
         run: echo holy guacomole it worked
