@@ -10,8 +10,8 @@ module.exports = async ({ github, context }) => {
   // console.log(result)
 
   const {PR_LABELS} = process.env;
-  console.log(PR_LABELS, typeof PR_LABELS)
-  console.log(PR_LABELS.map(label => label.name))
+  const prLables = JSON.parse(PR_LABELS)
+  console.log(prLabels.map(label => label.name).includes('bug'))
 };
 
 // draft, submitted, pr, prfailed, planned, planfailed, approved, applied, applyfailed
