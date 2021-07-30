@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
       - name: control
         env:
-          LABEL: ${{ toJson(github.event) }}
+          LABEL: ${{ toJson(github.event.labels) }}
         run: |
           echo "$LABEL"
       - name: label test
