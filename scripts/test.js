@@ -5,7 +5,7 @@ module.exports = async ({ github, context }) => {
   const result = await github.pulls.merge({
     owner: 'jlangy',
     repo: 'Test',
-    pull_number: 1,
+    pull_number: 19,
   });
   console.log(result)
 };
