@@ -35,6 +35,7 @@ const validateSubmission = (filename) => {
 
 beforeEach(() => {
   cy.window().then((win) => {
+    cy.log(Cypress.env('TOKEN'))
     win.sessionStorage.setItem('tokens', JSON.stringify(Cypress.env('TOKEN')));
   });
   cy.visit('https://bcgov.github.io/sso-terraform-dev/');
