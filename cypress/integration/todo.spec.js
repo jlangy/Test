@@ -35,7 +35,7 @@ const validateSubmission = (filename) => {
 
 beforeEach(() => {
   cy.window().then((win) => {
-    throw new Error(`${typeof Cypress.env('TOKEN')} ${Cypress.env('TOKEN')}`)
+    // throw new Error(`${typeof Cypress.env('TOKEN')} ${Cypress.env('TOKEN')}`)
     // console.log(typeof Cypress.env('TOKEN'))
 
     win.sessionStorage.setItem('tokens', Cypress.env('TOKEN'));
