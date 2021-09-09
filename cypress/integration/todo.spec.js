@@ -43,7 +43,7 @@ beforeEach(() => {
 describe('example to-do app', () => {
 
   it('should be logged in', () => {
-    cy.contains('Log in')
+    cy.contains('Log out')
     cy.screenshot('test')
   });
 
