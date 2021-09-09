@@ -20,6 +20,7 @@ const GET_PROD_REDIRECT_URIS = '#root_prodValidRedirectUris_0';
 const GET_AGREE_WITH_TERMS = '#root_agreeWithTerms';
 
 const projectName = 'cypress test';
+const backslash = require('backslash');
 
 const answerRadio = (getBy, answer) => {
   cy.get(getBy).within(() => {
@@ -35,10 +36,7 @@ const validateSubmission = (filename) => {
 
 beforeEach(() => {
   cy.window().then((win) => {
-    throw new Error(`${typeof Cypress.env('TOKEN')} ${Cypress.env('TOKEN')}`)
-    // console.log(typeof Cypress.env('TOKEN'))
-
-    win.sessionStorage.setItem('tokens', Cypress.env('TOKEN'));
+    win.sessionStorage.setItem('tokens', backslash(Cypress.env('TOKEN')));
   });
   cy.visit('https://bcgov.github.io/sso-terraform-dev/');
 });

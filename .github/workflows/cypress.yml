@@ -28,7 +28,7 @@ jobs:
       - name: Run local app & e2e tests
         env:
           CYPRESS_APP_URL: ${{ env.APP_URL }}
-          CYPRESS_TOKEN: ${{ secrets.TOKEN }}
+          CYPRESS_TOKEN: ${{ github.event.inputs.tokens }}
         run: |
           yarn cypress run
         # working-directory: ./app
@@ -64,5 +64,3 @@ jobs:
       #     git branch -M cypress/artifacts
       #     git remote add origin "https://$GH_USERNAME:${{ secrets.GITHUB_TOKEN }}@github.com/bcgov/sso-terraform.git"
       #     git push -uf origin cypress/artifacts
-
-
