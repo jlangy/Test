@@ -1,0 +1,66 @@
+on:
+  workflow_dispatch:
+    inputs:
+      tokens:
+        description: "Access token"
+        required: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-18.04
+    env:
+      APP_URL: https://bcgov.github.io/sso-terraform-dev/
+    steps:
+      - uses: actions/checkout@v2
+
+      # NPM PACKAGES
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Yarn dependencies in next-app
+        run: yarn
+        working-directory: ./app
+
+      # NodeJS APP & Cypress
+      - name: Run local app & e2e tests
+        env:
+          CYPRESS_APP_URL: ${{ env.APP_URL }}
+          TOKEN: ${{ github.event.inputs.tokens }}
+        run: |
+          yarn cypress run
+        working-directory: ./app
+
+      # Cypress Arifacts
+      # - name: Store Cypress artifacts
+      #   env:
+      #     GH_USERNAME: ${{ secrets.CI_GH_USERNAME }}
+      #     CYPRESS_VIDEOS: /home/runner/work/sso-terraform/sso-terraform/examples/next-app/cypress/videos
+      #   run: |
+      #     rm -rf .git
+      #     cd "$CYPRESS_VIDEOS"
+      #     cat >"$CYPRESS_VIDEOS/index.html" <<EOF
+      #     <!DOCTYPE html><html><body>
+      #     <style>
+      #       video {
+      #         width: 90%    !important;
+      #         height: auto  !important;
+      #       }
+      #     </style>
+      #     <video controls autoplay muted>
+      #       <source src="actions.spec.js.mp4" type="video/mp4">
+      #       Your browser does not support the video tag.
+      #     </video>
+      #     </body></html>
+      #     EOF
+      #     git init
+      #     git config user.name "$GH_USERNAME"
+      #     git config user.email "$GH_USERNAME@users.noreply.github.com"
+      #     git config commit.gpgsign false
+      #     git add .
+      #     git commit -m "initial commit"
+      #     git branch -M cypress/artifacts
+      #     git remote add origin "https://$GH_USERNAME:${{ secrets.GITHUB_TOKEN }}@github.com/bcgov/sso-terraform.git"
+      #     git push -uf origin cypress/artifacts
