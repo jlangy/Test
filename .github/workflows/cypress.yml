@@ -28,7 +28,7 @@ jobs:
       - name: Run local app & e2e tests
         env:
           CYPRESS_APP_URL: ${{ env.APP_URL }}
-          CYPRESS_TOKEN: "${{ github.event.inputs.tokens }}"
+          CYPRESS_TOKEN: ${{ secrets.token }}
         run: |
           yarn cypress run
         # working-directory: ./app
