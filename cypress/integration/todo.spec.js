@@ -46,7 +46,6 @@ beforeEach(() => {
 describe('Main Workflows', () => {
 
   it('should be logged in', () => {
-    cy.contains('Log out')
-    cy.screenshot('test')
+    cy.contains('Log out', {timeout: 10000})
   });
 });
