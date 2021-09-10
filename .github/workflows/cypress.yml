@@ -1,7 +1,8 @@
 on:
   workflow_dispatch:
     inputs:
-      tokens:
+      # See https://github.com/actions/runner/issues/475#issuecomment-742271143
+      WEBHOOK_TOKEN:
         description: "Access token"
         required: true
 
