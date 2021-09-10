@@ -35,7 +35,7 @@ const validateSubmission = (filename) => {
 
 beforeEach(() => {
   cy.window().then((win) => {
-    win.sessionStorage.setItem('tokens', backslash(Cypress.env('TOKENS')));
+    win.sessionStorage.setItem('tokens', backslash(Cypress.env('TOKEN')));
   });
   cy.visit(Cypress.env('APP_URL'));
 });
