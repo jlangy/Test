@@ -32,35 +32,3 @@ jobs:
         run: |
           yarn cypress run
         # working-directory: ./app
-
-      # Cypress Arifacts
-      # - name: Store Cypress artifacts
-      #   env:
-      #     GH_USERNAME: ${{ secrets.CI_GH_USERNAME }}
-      #     CYPRESS_VIDEOS: /home/runner/work/sso-terraform/sso-terraform/examples/next-app/cypress/videos
-      #   run: |
-      #     rm -rf .git
-      #     cd "$CYPRESS_VIDEOS"
-      #     cat >"$CYPRESS_VIDEOS/index.html" <<EOF
-      #     <!DOCTYPE html><html><body>
-      #     <style>
-      #       video {
-      #         width: 90%    !important;
-      #         height: auto  !important;
-      #       }
-      #     </style>
-      #     <video controls autoplay muted>
-      #       <source src="actions.spec.js.mp4" type="video/mp4">
-      #       Your browser does not support the video tag.
-      #     </video>
-      #     </body></html>
-      #     EOF
-      #     git init
-      #     git config user.name "$GH_USERNAME"
-      #     git config user.email "$GH_USERNAME@users.noreply.github.com"
-      #     git config commit.gpgsign false
-      #     git add .
-      #     git commit -m "initial commit"
-      #     git branch -M cypress/artifacts
-      #     git remote add origin "https://$GH_USERNAME:${{ secrets.GITHUB_TOKEN }}@github.com/bcgov/sso-terraform.git"
-      #     git push -uf origin cypress/artifacts
