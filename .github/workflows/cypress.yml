@@ -12,3 +12,4 @@ jobs:
           until gibberish;
           echo retrying in 10 seconds...
           sleep 10
+          done
