@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: sleep
         run: |
-          until exit 1;
+          until exit 1 || false;
           do echo retrying in 10 seconds...
           sleep 10
           done
