@@ -7,5 +7,8 @@ jobs:
     timeout-minutes: 1
     steps:
       - uses: actions/checkout@v2
-      - name: Install Yarn dependencies in next-app
-        run: sleep 2m
+      - name: sleep
+        run: |
+          until gibberish;
+          echo retrying in 10 seconds...
+          sleep 10
